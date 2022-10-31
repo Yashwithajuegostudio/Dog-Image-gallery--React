@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Gallery from "./Components/Gallery/Gallery";
 
 function App() {
-  return <></>;
+  return <Gallery />;
 }
 
 export default App;
