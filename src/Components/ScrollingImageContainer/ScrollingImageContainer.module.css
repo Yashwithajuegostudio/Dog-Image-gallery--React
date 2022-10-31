@@ -1,0 +1,11 @@
+.scrolling_image_container {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  height: 7rem;
+  border: 1px solid black;
+  overflow-x: scroll;
+}
+.slides {
+  display: flex;
+}

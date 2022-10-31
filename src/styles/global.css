@@ -7,3 +7,10 @@
   --light-blue-color: #e9e1f8;
   --dark-blue-color: #7f5fc9;
 }
+.image_container {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}

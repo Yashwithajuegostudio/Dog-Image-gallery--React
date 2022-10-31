@@ -1,7 +1,6 @@
-.image_container {
-  display: flex;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3rem;
+.main_image_conatiner {
+  width: 18rem;
+  height: 18rem;
+  border: 1px solid black;
+  border-radius: 2rem;
 }
