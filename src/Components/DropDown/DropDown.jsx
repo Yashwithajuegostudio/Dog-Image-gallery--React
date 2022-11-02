@@ -6,6 +6,7 @@ import {
   title,
 } from "../../utils/constants";
 import ImageContainer from "../ImageContainer/ImageContainer";
+import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import styles from "./DropDown.module.css";
 
 function DropDown() {
@@ -15,6 +16,7 @@ function DropDown() {
   const [DropDownList, setDropDownList] = useState([]);
   const [open, setOpen] = useState(false);
   const [defaultImage, setDefaultImage] = useState([]);
+  const [ScrollableImageList, setScrollableImageList] = useState([]);
   const onClickSelectedItemClicked = async (selectedItem) => {
     setDropdownTitle(selectedItem);
     setOpen((prevOpen) => !prevOpen);
@@ -31,6 +33,7 @@ function DropDown() {
         (value) => value.length > 0
       );
       setDefaultImage(breedImageArray[0]);
+      setScrollableImageList(breedImageArray);
     } catch (error) {
       console.error(error);
     }
@@ -78,6 +81,7 @@ function DropDown() {
         </div>
       )}
       <ImageContainer image={defaultImage} />
+      <ScrollingImageContainer image={ScrollableImageList} />
     </div>
   );
 }
