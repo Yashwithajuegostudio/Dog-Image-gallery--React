@@ -1,13 +1,20 @@
-import React from "react";
 import { enabled, title } from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ImageContainer.module.css";
 
-function ImageContainer() {
+function ImageContainer(props) {
   return (
     <div className="image_container">
       <Button title={title.previousBtnTitle}></Button>
-      <div className={styles.main_image_container}></div>
+      <div className={styles.main_image_container}>
+        {props.image.length !== 0 && (
+          <img
+            src={props.image}
+            alt="defaultImage"
+            className={styles.default_image}
+          />
+        )}
+      </div>
       <Button title={title.nextBtnTitle} style={enabled}></Button>
     </div>
   );

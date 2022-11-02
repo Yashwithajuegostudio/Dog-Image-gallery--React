@@ -10,3 +10,4 @@ export const title = {
 };
 // API
 export const breedNameListAPI = "https://dog.ceo/api/breeds/list/all";
+export const dogBreedImageAPI = `https://dog.ceo/api/breed/images`;

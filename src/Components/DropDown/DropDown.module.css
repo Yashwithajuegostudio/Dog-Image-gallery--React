@@ -15,6 +15,7 @@
   border: 0.1rem solid var(--light-grey-color);
   border-radius: 0.4rem;
   cursor: pointer;
+  margin-bottom: 2rem;
 }
 .content {
   position: absolute;
