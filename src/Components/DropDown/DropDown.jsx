@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { getApiCall } from "../../services/apiServices";
-import {
-  breedNameListAPI,
-  dogBreedImageAPI,
-  title,
-} from "../../utils/constants";
+import { BreedImageList, breedList, title } from "../../utils/constants";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import styles from "./DropDown.module.css";
@@ -22,7 +18,7 @@ function DropDown() {
     setOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(
-        dogBreedImageAPI.replace(`breed/`, `breed/${selectedItem}/`)
+        BreedImageList.replace(`breed/`, `breed/${selectedItem}/`)
       ).then((data) => {
         if (data.status !== "success") {
           throw Error("Something went wrong");
@@ -41,7 +37,7 @@ function DropDown() {
   const onClickDropdownHeader = async () => {
     setOpen((prevOpen) => !prevOpen);
     try {
-      const responseData = await getApiCall(breedNameListAPI).then((data) => {
+      const responseData = await getApiCall(breedList).then((data) => {
         if (data.status !== "success") {
           throw Error("Something went wrong");
         }

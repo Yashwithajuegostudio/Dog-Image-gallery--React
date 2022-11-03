@@ -1,5 +1,7 @@
+import { basePath } from "../utils/constants";
+
 function getApiCall(getUrl) {
-  return fetch(getUrl, {
+  return fetch(basePath + getUrl, {
     method: "GET",
   })
     .then((response) => {

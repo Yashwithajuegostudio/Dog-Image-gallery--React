@@ -1,4 +1,4 @@
-import { enabled, title } from "../../utils/constants";
+import { activateBtn, title } from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ImageContainer.module.css";
 
@@ -15,7 +15,7 @@ function ImageContainer(props) {
           />
         )}
       </div>
-      <Button title={title.nextBtnTitle} style={enabled}></Button>
+      <Button title={title.nextBtnTitle} style={activateBtn}></Button>
     </div>
   );
 }

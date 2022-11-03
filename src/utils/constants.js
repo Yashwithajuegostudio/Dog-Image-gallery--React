@@ -1,5 +1,5 @@
 // enabled button style
-export const enabled = {
+export const activateBtn = {
   backgroundColor: " var(--dark-blue-color)",
 };
 // titles
@@ -8,6 +8,9 @@ export const title = {
   nextBtnTitle: "\u203A",
   defaultDropdownTitle: "Please select a Breed ...",
 };
-// API
-export const breedNameListAPI = "https://dog.ceo/api/breeds/list/all";
-export const dogBreedImageAPI = `https://dog.ceo/api/breed/images`;
+// BASE PATH
+export const basePath = "https://dog.ceo/api";
+
+// Path
+export const breedList = "/breeds/list/all";
+export const BreedImageList = "/breed/images";

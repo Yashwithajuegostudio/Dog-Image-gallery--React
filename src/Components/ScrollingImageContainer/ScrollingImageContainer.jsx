@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { enabled, title } from "../../utils/constants";
+import { activateBtn, title } from "../../utils/constants";
 import Button from "../Button/Button";
 
 import styles from "./ScrollingImageContainer.module.css";
@@ -34,7 +34,7 @@ function ScrollingImageContainer(props) {
           })}
         </div>
       </div>
-      <Button title={title.nextBtnTitle} style={enabled}></Button>
+      <Button title={title.nextBtnTitle} style={activateBtn}></Button>
     </div>
   );
 }
