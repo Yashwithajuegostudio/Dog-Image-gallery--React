@@ -6,7 +6,7 @@ import styles from "./ScrollingImageContainer.module.css";
 
 function ScrollingImageContainer(props) {
   return (
-    <div className={styles.image_container}>
+    <div className="image_container">
       <Button title={title.previousBtnTitle}></Button>
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
