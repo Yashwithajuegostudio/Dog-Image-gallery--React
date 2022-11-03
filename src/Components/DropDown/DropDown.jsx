@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { getApiCall } from "../../services/apiServices";
-import { BreedImageList, breedList, title } from "../../utils/constants";
+import {
+  BreedImageList,
+  breedList,
+  initialStateValue,
+  errorMessage,
+  successStatus,
+  title,
+} from "../../utils/constants";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import styles from "./DropDown.module.css";
@@ -13,6 +20,8 @@ function DropDown() {
   const [open, setOpen] = useState(false);
   const [defaultImage, setDefaultImage] = useState([]);
   const [ScrollableImageList, setScrollableImageList] = useState([]);
+
+  // OnClick of selectedItem in dropdown List
   const onClickSelectedItemClicked = async (selectedItem) => {
     setDropdownTitle(selectedItem);
     setOpen((prevOpen) => !prevOpen);
@@ -20,26 +29,28 @@ function DropDown() {
       const responseData = await getApiCall(
         BreedImageList.replace(`breed/`, `breed/${selectedItem}/`)
       ).then((data) => {
-        if (data.status !== "success") {
-          throw Error("Something went wrong");
+        if (data.status !== successStatus) {
+          throw Error(errorMessage.statusError);
         }
         return data.message;
       });
       const breedImageArray = Object.values(responseData).filter(
-        (value) => value.length > 0
+        (value) => value.length > initialStateValue
       );
-      setDefaultImage(breedImageArray[0]);
+      setDefaultImage(breedImageArray[initialStateValue]);
       setScrollableImageList(breedImageArray);
     } catch (error) {
       console.error(error);
     }
   };
+
+  // onClick of Dropdown Header
   const onClickDropdownHeader = async () => {
     setOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(breedList).then((data) => {
-        if (data.status !== "success") {
-          throw Error("Something went wrong");
+        if (data.status !== successStatus) {
+          throw Error(errorMessage.statusError);
         }
         return data.message;
       });
@@ -79,7 +90,7 @@ function DropDown() {
       <ImageContainer image={defaultImage} />
       <ScrollingImageContainer
         image={ScrollableImageList}
-        status={DropdownTitle}
+        dropDownStatus={DropdownTitle}
       />
     </div>
   );

@@ -1,12 +1,13 @@
-import { basePath } from "../utils/constants";
+import { basePath, errorMessage, methodName } from "../utils/constants";
 
+// API call
 function getApiCall(getUrl) {
   return fetch(basePath + getUrl, {
-    method: "GET",
+    method: methodName.GET,
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`Request failed with the status ${response.status}`);
+        throw new Error(errorMessage.responseError + ` ${response.status}`);
       }
       return response.json();
     })

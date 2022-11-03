@@ -1,4 +1,4 @@
-import { activateBtn, title } from "../../utils/constants";
+import { activateBtn, title, initialStateValue } from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ImageContainer.module.css";
 
@@ -7,10 +7,10 @@ function ImageContainer(props) {
     <div className="image_container">
       <Button title={title.previousBtnTitle}></Button>
       <div className={styles.main_image_container}>
-        {props.image.length !== 0 && (
+        {props.image.length !== initialStateValue && (
           <img
             src={props.image}
-            alt="defaultImage"
+            alt={title.defaultImageTitle}
             className={styles.default_image}
           />
         )}

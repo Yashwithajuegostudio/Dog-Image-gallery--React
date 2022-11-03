@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { activateBtn, title } from "../../utils/constants";
+import { activateBtn, initialStateValue, title } from "../../utils/constants";
 import Button from "../Button/Button";
-
 import styles from "./ScrollingImageContainer.module.css";
 
 function ScrollingImageContainer(props) {
-  const [previousIndexValue, setPreviousIndexValue] = useState(0);
+  const [previousIndexValue, setPreviousIndexValue] =
+    useState(initialStateValue);
   useEffect(() => {
-    setPreviousIndexValue(0);
-  }, [props.status]);
-  const onClickScrollableImageItem = (index) => {
-    setPreviousIndexValue(index);
+    setPreviousIndexValue(initialStateValue);
+  }, [props.dropDownStatus]);
+
+  // onClick of ImageItem in ScrollingImage Container
+  const onClickScrollableImageItem = (imageIndex) => {
+    setPreviousIndexValue(imageIndex);
   };
 
   return (
@@ -18,15 +20,17 @@ function ScrollingImageContainer(props) {
       <Button title={title.previousBtnTitle}></Button>
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
-          {props.image.map((selectedItem, index) => {
+          {props.image.map((selectedItem, imageIndex) => {
             return (
               <div className={styles.dog_breed_image_container}>
                 <img
-                  className={index === previousIndexValue ? styles.active : ""}
+                  className={
+                    imageIndex === previousIndexValue ? styles.active : ""
+                  }
                   src={selectedItem}
-                  alt="scrollableImage"
+                  alt={title.scrollableImageTitle}
                   onClick={() => {
-                    onClickScrollableImageItem(index);
+                    onClickScrollableImageItem(imageIndex);
                   }}
                 />
               </div>
