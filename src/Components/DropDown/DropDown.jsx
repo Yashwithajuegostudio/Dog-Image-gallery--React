@@ -81,7 +81,10 @@ function DropDown() {
         </div>
       )}
       <ImageContainer image={defaultImage} />
-      <ScrollingImageContainer image={ScrollableImageList} />
+      <ScrollingImageContainer
+        image={ScrollableImageList}
+        status={DropdownTitle}
+      />
     </div>
   );
 }
