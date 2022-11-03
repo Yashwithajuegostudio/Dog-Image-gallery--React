@@ -1,9 +1,9 @@
 :root {
-  /* grey varient */
+  /* grey variant */
   --light-grey-color: #d3d3d3;
   --dark-grey-color: #6f6f6f;
 
-  /* blue varient */
+  /* blue variant */
   --light-blue-color: #e9e1f8;
   --dark-blue-color: #7f5fc9;
 }
@@ -14,4 +14,9 @@
   align-items: center;
   margin-bottom: 3rem;
   width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }

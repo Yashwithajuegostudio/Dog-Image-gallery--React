@@ -11,10 +11,15 @@ function ScrollingImageContainer(props) {
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
           {props.image.map((selectedItem) => {
+            let activeImage;
+            props.image[0] === selectedItem
+              ? (activeImage = true)
+              : (activeImage = false);
+
             return (
               <div className={styles.dog_breed_image_container}>
                 <img
-                  className={styles.dog_image}
+                  className={activeImage ? styles.active : ""}
                   src={selectedItem}
                   alt="scrollableImage"
                 />
