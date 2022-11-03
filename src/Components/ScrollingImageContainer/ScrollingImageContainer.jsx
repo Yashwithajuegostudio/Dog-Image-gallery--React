@@ -6,18 +6,44 @@ import styles from "./ScrollingImageContainer.module.css";
 function ScrollingImageContainer(props) {
   const [previousIndexValue, setPreviousIndexValue] =
     useState(initialStateValue);
+  const [disable, setDisable] = useState(false);
   useEffect(() => {
     setPreviousIndexValue(initialStateValue);
-  }, [props.dropDownStatus]);
+  }, [props.dropDownStatus, props.image]);
 
   // onClick of ImageItem in ScrollingImage Container
-  const onClickScrollableImageItem = (imageIndex) => {
+  const onClickScrollableImageItem = (imageIndex, imagePath) => {
     setPreviousIndexValue(imageIndex);
+    props.onClickImgHandler(imagePath);
+  };
+  props.getImageIndex(previousIndexValue);
+  // onClick functionality for previous slider button
+  const onclickPreviousBtn = () => {
+    setPreviousIndexValue(previousIndexValue - 1);
+    const imagePath = props.image.filter(
+      (item, index) => index === previousIndexValue - 1
+    );
+    props.onClickImgHandler(imagePath);
   };
 
+  // onClick functionality for previous slider button
+  const onclickNextBtn = () => {
+    if (previousIndexValue === props.image.length - 2) {
+      setDisable(true);
+    }
+    setPreviousIndexValue(previousIndexValue + 1);
+    const imagePath = props.image.filter(
+      (item, index) => index === previousIndexValue + 1
+    );
+    props.onClickImgHandler(imagePath);
+  };
   return (
     <div className="image_container">
-      <Button title={title.previousBtnTitle}></Button>
+      <Button
+        title={title.previousBtnTitle}
+        clickHandler={onclickPreviousBtn}
+        disabled={previousIndexValue < 1}
+      ></Button>
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
           {props.image.map((selectedItem, imageIndex) => {
@@ -30,7 +56,7 @@ function ScrollingImageContainer(props) {
                   src={selectedItem}
                   alt={title.scrollableImageTitle}
                   onClick={() => {
-                    onClickScrollableImageItem(imageIndex);
+                    onClickScrollableImageItem(imageIndex, selectedItem);
                   }}
                 />
               </div>
@@ -38,7 +64,12 @@ function ScrollingImageContainer(props) {
           })}
         </div>
       </div>
-      <Button title={title.nextBtnTitle} style={activateBtn}></Button>
+      <Button
+        title={title.nextBtnTitle}
+        style={activateBtn}
+        clickHandler={onclickNextBtn}
+        disabled={previousIndexValue > props.image.length - 2}
+      ></Button>
     </div>
   );
 }

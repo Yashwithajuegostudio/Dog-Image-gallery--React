@@ -19,6 +19,7 @@ function DropDown() {
   const [DropDownList, setDropDownList] = useState([]);
   const [open, setOpen] = useState(false);
   const [defaultImage, setDefaultImage] = useState([]);
+  const [imageIndex, setImageIndex] = useState(0);
   const [ScrollableImageList, setScrollableImageList] = useState([]);
 
   // OnClick of selectedItem in dropdown List
@@ -37,7 +38,7 @@ function DropDown() {
       const breedImageArray = Object.values(responseData).filter(
         (value) => value.length > initialStateValue
       );
-      setDefaultImage(breedImageArray[initialStateValue]);
+      setDefaultImage(breedImageArray);
       setScrollableImageList(breedImageArray);
     } catch (error) {
       console.error(error);
@@ -61,6 +62,12 @@ function DropDown() {
     } catch (error) {
       console.error(error);
     }
+  };
+  const onClickImgHandler = (path) => {
+    setDefaultImage([path]);
+  };
+  const getImageIndex = (indexValue) => {
+    setImageIndex(indexValue);
   };
   return (
     <div className={styles.drop_down}>
@@ -87,10 +94,12 @@ function DropDown() {
           })}
         </div>
       )}
-      <ImageContainer image={defaultImage} />
+      <ImageContainer image={ScrollableImageList} imageIndex={imageIndex} />
       <ScrollingImageContainer
         image={ScrollableImageList}
         dropDownStatus={DropdownTitle}
+        onClickImgHandler={onClickImgHandler}
+        getImageIndex={getImageIndex}
       />
     </div>
   );
