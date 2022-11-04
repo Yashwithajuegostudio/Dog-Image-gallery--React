@@ -1,7 +1,8 @@
-// Active button style
+// Classnames
 export const activateBtn = {
   backgroundColor: " var(--dark-blue-color)",
 };
+
 // Titles
 export const title = {
   previousBtnTitle: "\u2039",
@@ -10,6 +11,7 @@ export const title = {
   defaultImageTitle: "defaultImage",
   scrollableImageTitle: "scrollableImage",
 };
+
 // BASE PATH
 export const basePath = "https://dog.ceo/api";
 
