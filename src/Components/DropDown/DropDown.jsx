@@ -17,13 +17,13 @@ function DropDown({ getImageList, getDropDownStatus }) {
     title.defaultDropdownTitle
   );
   const [DropDownList, setDropDownList] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [dropDownOpen, setDropDownOpen] = useState(false);
 
   // OnClick of selectedItem in dropdown List
   const onClickSelectedItemClicked = async (selectedItem) => {
     setDropdownTitle(selectedItem);
     getDropDownStatus(DropdownTitle);
-    setOpen((prevOpen) => !prevOpen);
+    setDropDownOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(
         BreedImageList.replace(`breed/`, `breed/${selectedItem}/`)
@@ -44,7 +44,7 @@ function DropDown({ getImageList, getDropDownStatus }) {
 
   // onClick of Dropdown Header
   const onClickDropdownHeader = async () => {
-    setOpen((prevOpen) => !prevOpen);
+    setDropDownOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(breedList).then((data) => {
         if (data.status !== successStatus) {
@@ -71,7 +71,7 @@ function DropDown({ getImageList, getDropDownStatus }) {
       >
         {DropdownTitle}
       </div>
-      {open && (
+      {dropDownOpen && (
         <div className={styles.content}>
           {DropDownList.map((selectedItem) => {
             return (

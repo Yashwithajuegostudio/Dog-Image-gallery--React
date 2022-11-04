@@ -26,6 +26,8 @@ export const errorMessage = {
   responseError: "Request failed with the status",
 };
 export const initialStateValue = 0;
+
+// API Method Names
 export const methodName = {
   GET: "GET",
 };
