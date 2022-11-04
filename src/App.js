@@ -1,8 +1,14 @@
 import "./App.css";
 import Gallery from "./components/Gallery/Gallery";
+// export const ImageIndexContext = createContext();
 
 function App() {
-  return <Gallery />;
-}
+  // const [imageIndex, setImageIndex] = useState(0);
 
+  return (
+    // <ImageIndexContext.Provider value={{ imageIndex, setImageIndex }}>
+    <Gallery />
+    // </ImageIndexContext.Provider>
+  );
+}
 export default App;

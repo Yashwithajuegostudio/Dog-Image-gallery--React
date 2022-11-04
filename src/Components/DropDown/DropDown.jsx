@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { getApiCall } from "../../services/apiServices";
 import {
   BreedImageList,
@@ -8,23 +9,20 @@ import {
   successStatus,
   title,
 } from "../../utils/constants";
-import ImageContainer from "../ImageContainer/ImageContainer";
-import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
+
 import styles from "./DropDown.module.css";
 
-function DropDown() {
+function DropDown({ getImageList, getDropDownStatus }) {
   const [DropdownTitle, setDropdownTitle] = useState(
     title.defaultDropdownTitle
   );
   const [DropDownList, setDropDownList] = useState([]);
   const [open, setOpen] = useState(false);
-  const [defaultImage, setDefaultImage] = useState([]);
-  const [imageIndex, setImageIndex] = useState(0);
-  const [ScrollableImageList, setScrollableImageList] = useState([]);
 
   // OnClick of selectedItem in dropdown List
   const onClickSelectedItemClicked = async (selectedItem) => {
     setDropdownTitle(selectedItem);
+    getDropDownStatus(DropdownTitle);
     setOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(
@@ -38,8 +36,7 @@ function DropDown() {
       const breedImageArray = Object.values(responseData).filter(
         (value) => value.length > initialStateValue
       );
-      setDefaultImage(breedImageArray);
-      setScrollableImageList(breedImageArray);
+      getImageList(breedImageArray);
     } catch (error) {
       console.error(error);
     }
@@ -63,12 +60,7 @@ function DropDown() {
       console.error(error);
     }
   };
-  const onClickImgHandler = (path) => {
-    setDefaultImage([path]);
-  };
-  const getImageIndex = (indexValue) => {
-    setImageIndex(indexValue);
-  };
+
   return (
     <div className={styles.drop_down}>
       <div
@@ -94,13 +86,6 @@ function DropDown() {
           })}
         </div>
       )}
-      <ImageContainer image={ScrollableImageList} imageIndex={imageIndex} />
-      <ScrollingImageContainer
-        image={ScrollableImageList}
-        dropDownStatus={DropdownTitle}
-        onClickImgHandler={onClickImgHandler}
-        getImageIndex={getImageIndex}
-      />
     </div>
   );
 }

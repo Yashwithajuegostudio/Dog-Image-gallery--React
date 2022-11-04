@@ -3,39 +3,30 @@ import { activateBtn, initialStateValue, title } from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ScrollingImageContainer.module.css";
 
-function ScrollingImageContainer(props) {
+function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
   const [previousIndexValue, setPreviousIndexValue] =
     useState(initialStateValue);
-  const [disable, setDisable] = useState(false);
+  const [, setDisable] = useState(false);
   useEffect(() => {
     setPreviousIndexValue(initialStateValue);
-  }, [props.dropDownStatus, props.image]);
+  }, [dropDownStatus, image]);
 
   // onClick of ImageItem in ScrollingImage Container
   const onClickScrollableImageItem = (imageIndex, imagePath) => {
     setPreviousIndexValue(imageIndex);
-    props.onClickImgHandler(imagePath);
   };
-  props.getImageIndex(previousIndexValue);
+  getImageIndex(previousIndexValue);
   // onClick functionality for previous slider button
   const onclickPreviousBtn = () => {
     setPreviousIndexValue(previousIndexValue - 1);
-    const imagePath = props.image.filter(
-      (item, index) => index === previousIndexValue - 1
-    );
-    props.onClickImgHandler(imagePath);
   };
 
   // onClick functionality for previous slider button
   const onclickNextBtn = () => {
-    if (previousIndexValue === props.image.length - 2) {
+    if (previousIndexValue === image.length - 2) {
       setDisable(true);
     }
     setPreviousIndexValue(previousIndexValue + 1);
-    const imagePath = props.image.filter(
-      (item, index) => index === previousIndexValue + 1
-    );
-    props.onClickImgHandler(imagePath);
   };
   return (
     <div className="image_container">
@@ -44,9 +35,15 @@ function ScrollingImageContainer(props) {
         clickHandler={onclickPreviousBtn}
         disabled={previousIndexValue < 1}
       ></Button>
+      <Button
+        title={title.previousBtnTitle}
+        id={styles.BtnPosition}
+        clickHandler={onclickPreviousBtn}
+        disabled={previousIndexValue < 1}
+      ></Button>
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
-          {props.image.map((selectedItem, imageIndex) => {
+          {image.map((selectedItem, imageIndex) => {
             return (
               <div className={styles.dog_breed_image_container}>
                 <img
@@ -66,9 +63,16 @@ function ScrollingImageContainer(props) {
       </div>
       <Button
         title={title.nextBtnTitle}
+        id={styles.BtnPosition}
         style={activateBtn}
         clickHandler={onclickNextBtn}
-        disabled={previousIndexValue > props.image.length - 2}
+        disabled={previousIndexValue > image.length - 2}
+      ></Button>
+      <Button
+        title={title.nextBtnTitle}
+        style={activateBtn}
+        clickHandler={onclickNextBtn}
+        disabled={previousIndexValue > image.length - 2}
       ></Button>
     </div>
   );
