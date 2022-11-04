@@ -9,12 +9,17 @@ function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
   const [dropDownStatus, setDropDownStatus] = useState();
   const [imageList, setImageList] = useState([]);
+
+  // Get the ImageIndex from the dropdown component functionality
   const getImageIndex = (indexValue) => {
     setImageIndex(indexValue);
   };
+
+  // get the Image List from the dropdown component functionality
   const getImageList = (imageList) => {
     setImageList(imageList);
   };
+  // get the dropdown status from the dropdown component functionality
   const getDropDownStatus = (dropDownStatus) => {
     setDropDownStatus(dropDownStatus);
   };

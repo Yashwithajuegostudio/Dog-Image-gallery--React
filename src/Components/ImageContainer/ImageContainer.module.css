@@ -1,7 +1,7 @@
 .main_image_container {
   width: 18rem;
   height: 18rem;
-  border: 1px solid black;
+  border: 1px solid var(--primary-black-color);
   border-radius: 2rem;
 }
 .default_image {

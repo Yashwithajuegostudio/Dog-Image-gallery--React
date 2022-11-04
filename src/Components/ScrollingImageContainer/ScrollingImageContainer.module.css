@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   height: 7rem;
-  border: 1px solid black;
+  border: 1px solid var(--primary-black-color);
   overflow-x: scroll;
 }
 .slides {
@@ -16,7 +16,7 @@
   margin: 0.5rem;
 }
 .active {
-  border: 0.2rem solid red;
+  border: 0.2rem solid var(--primary-red-color);
 }
 #BtnPosition {
   position: relative;

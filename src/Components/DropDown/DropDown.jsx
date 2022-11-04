@@ -6,8 +6,8 @@ import {
   breedList,
   initialStateValue,
   errorMessage,
-  successStatus,
   title,
+  status,
 } from "../../utils/constants";
 
 import styles from "./DropDown.module.css";
@@ -28,7 +28,7 @@ function DropDown({ getImageList, getDropDownStatus }) {
       const responseData = await getApiCall(
         BreedImageList.replace(`breed/`, `breed/${selectedItem}/`)
       ).then((data) => {
-        if (data.status !== successStatus) {
+        if (data.status !== status.successStatus) {
           throw Error(errorMessage.statusError);
         }
         return data.message;
@@ -47,7 +47,7 @@ function DropDown({ getImageList, getDropDownStatus }) {
     setDropDownOpen((prevOpen) => !prevOpen);
     try {
       const responseData = await getApiCall(breedList).then((data) => {
-        if (data.status !== successStatus) {
+        if (data.status !== status.successStatus) {
           throw Error(errorMessage.statusError);
         }
         return data.message;
@@ -73,9 +73,10 @@ function DropDown({ getImageList, getDropDownStatus }) {
       </div>
       {dropDownOpen && (
         <div className={styles.content}>
-          {DropDownList.map((selectedItem) => {
+          {DropDownList.map((selectedItem, index) => {
             return (
               <option
+                key={index}
                 onClick={() => {
                   onClickSelectedItemClicked(selectedItem);
                 }}

@@ -20,7 +20,11 @@ export const breedList = "/breeds/list/all";
 export const BreedImageList = "/breed/images";
 
 // Status
-export const successStatus = "success";
+export const status = {
+  previousBtnStatus: "previous",
+  nextBtnStatus: "next",
+  successStatus: "success",
+};
 
 // Error Messages
 export const errorMessage = {

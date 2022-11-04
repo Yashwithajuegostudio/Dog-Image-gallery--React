@@ -6,6 +6,11 @@
   /* blue variant */
   --light-blue-color: #e9e1f8;
   --dark-blue-color: #7f5fc9;
+
+  /* primary colors */
+  --primary-black-color: black;
+  --primary-red-color: red;
+  --primary-white-color: white;
 }
 .image_container {
   display: flex;

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { activateBtn, initialStateValue, title } from "../../utils/constants";
+import {
+  activateBtn,
+  initialStateValue,
+  status,
+  title,
+} from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ScrollingImageContainer.module.css";
 
@@ -12,18 +17,19 @@ function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
   }, [dropDownStatus]);
 
   // onClick of ImageItem in ScrollingImage Container
-  const onClickScrollableImageItem = (imageIndex, imagePath) => {
+  const onClickScrollableImageItem = (imageIndex) => {
     setPreviousIndexValue(imageIndex);
+    getImageIndex(imageIndex);
   };
-  getImageIndex(previousIndexValue);
 
   // slider button functionality
   const onclickSliderBtn = (btnStatus) => {
-    if (btnStatus === "previous") {
+    if (btnStatus === status.previousBtnStatus) {
       setPreviousIndexValue(previousIndexValue - 1);
-    }
-    if (btnStatus === "next") {
+      getImageIndex(previousIndexValue - 1);
+    } else {
       setPreviousIndexValue(previousIndexValue + 1);
+      getImageIndex(previousIndexValue + 1);
     }
   };
 
@@ -32,23 +38,26 @@ function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
       <Button
         title={title.previousBtnTitle}
         clickHandler={() => {
-          onclickSliderBtn("previous");
+          onclickSliderBtn(status.previousBtnStatus);
         }}
         disabled={previousIndexValue < 1}
-      ></Button>
+      />
       <Button
         title={title.previousBtnTitle}
-        id={styles.BtnPosition}
+        position={styles.BtnPosition}
         clickHandler={() => {
-          onclickSliderBtn("previous");
+          onclickSliderBtn(status.previousBtnStatus);
         }}
         disabled={previousIndexValue < 1}
-      ></Button>
+      />
       <div className={styles.scrolling_image_container}>
         <div className={styles.slides}>
           {image.map((selectedItem, imageIndex) => {
             return (
-              <div className={styles.dog_breed_image_container}>
+              <div
+                className={styles.dog_breed_image_container}
+                key={imageIndex}
+              >
                 <img
                   className={
                     imageIndex === previousIndexValue ? styles.active : ""
@@ -56,7 +65,7 @@ function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
                   src={selectedItem}
                   alt={title.scrollableImageTitle}
                   onClick={() => {
-                    onClickScrollableImageItem(imageIndex, selectedItem);
+                    onClickScrollableImageItem(imageIndex);
                   }}
                 />
               </div>
@@ -66,21 +75,21 @@ function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
       </div>
       <Button
         title={title.nextBtnTitle}
-        id={styles.BtnPosition}
+        position={styles.BtnPosition}
         style={activateBtn}
         clickHandler={() => {
-          onclickSliderBtn("next");
+          onclickSliderBtn(status.nextBtnStatus);
         }}
         disabled={previousIndexValue >= image.length - 1}
-      ></Button>
+      />
       <Button
         title={title.nextBtnTitle}
         style={activateBtn}
         clickHandler={() => {
-          onclickSliderBtn("next");
+          onclickSliderBtn(status.nextBtnStatus);
         }}
         disabled={previousIndexValue >= image.length - 1}
-      ></Button>
+      />
     </div>
   );
 }
