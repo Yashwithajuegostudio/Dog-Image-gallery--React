@@ -24,13 +24,13 @@ function ScrollingImageContainer({ image, dropDownStatus, getImageIndex }) {
 
   // slider button functionality
   const onclickSliderBtn = (btnStatus) => {
-    if (btnStatus === status.previousBtnStatus) {
-      setPreviousIndexValue(previousIndexValue - 1);
-      getImageIndex(previousIndexValue - 1);
-    } else {
-      setPreviousIndexValue(previousIndexValue + 1);
-      getImageIndex(previousIndexValue + 1);
-    }
+    btnStatus === status.previousBtnStatus
+      ? setPreviousIndexValue(previousIndexValue - 1)(
+          getImageIndex(previousIndexValue - 1)
+        )
+      : setPreviousIndexValue(previousIndexValue + 1)(
+          getImageIndex(previousIndexValue + 1)
+        );
   };
 
   return (
