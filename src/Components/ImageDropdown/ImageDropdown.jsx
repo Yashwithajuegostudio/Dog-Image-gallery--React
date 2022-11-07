@@ -10,7 +10,7 @@ import {
   status,
 } from "../../utils/constants";
 
-import styles from "./DropDown.module.css";
+import styles from "./ImageDropdown.module.css";
 
 function DropDown({ getImageList, getDropDownStatus }) {
   const [DropdownTitle, setDropdownTitle] = useState(

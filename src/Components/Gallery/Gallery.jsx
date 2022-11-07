@@ -1,6 +1,5 @@
 import styles from "./Gallery.module.css";
-import "../../styles/global.css";
-import DropDown from "../DropDown/DropDown";
+import DropDown from "../ImageDropdown/ImageDropdown";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
