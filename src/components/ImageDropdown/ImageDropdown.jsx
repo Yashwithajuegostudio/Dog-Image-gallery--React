@@ -2,17 +2,16 @@ import React, { useState } from "react";
 
 import { getApiCall } from "../../services/apiServices";
 import {
-  BreedImageList,
   breedList,
-  initialStateValue,
   errorMessage,
   title,
   status,
+  INITIAL_INDEX_VALUE,
 } from "../../utils/constants";
 
 import styles from "./ImageDropdown.module.css";
 
-function DropDown({ getImageList, getDropDownStatus }) {
+function DropDown({ setDropDownStatus, setBreedImageData }) {
   const [DropdownTitle, setDropdownTitle] = useState(
     title.defaultDropdownTitle
   );
@@ -22,43 +21,31 @@ function DropDown({ getImageList, getDropDownStatus }) {
   // OnClick of selectedItem in dropdown List
   const onClickSelectedItemClicked = async (selectedItem) => {
     setDropdownTitle(selectedItem);
-    getDropDownStatus(DropdownTitle);
+    setDropDownStatus(DropdownTitle);
     setDropDownOpen((prevOpen) => !prevOpen);
-    try {
-      const responseData = await getApiCall(
-        BreedImageList.replace(`breed/`, `breed/${selectedItem}/`)
-      ).then((data) => {
-        if (data.status !== status.successStatus) {
-          throw Error(errorMessage.statusError);
-        }
-        return data.message;
-      });
-      const breedImageArray = Object.values(responseData).filter(
-        (value) => value.length > initialStateValue
-      );
-      getImageList(breedImageArray);
-    } catch (error) {
-      console.error(error);
-    }
+    setBreedImageData(selectedItem);
   };
-
-  // onClick of Dropdown Header
-  const onClickDropdownHeader = async () => {
-    setDropDownOpen((prevOpen) => !prevOpen);
+  // set the drop down header title
+  const setDropdownData = async () => {
     try {
-      const responseData = await getApiCall(breedList).then((data) => {
+      const breedNameListData = await getApiCall(breedList).then((data) => {
         if (data.status !== status.successStatus) {
           throw Error(errorMessage.statusError);
         }
         return data.message;
       });
-      const breedNameList = Object.keys(responseData).filter(
-        (key) => key.length > 0
+      const breedNameList = Object.keys(breedNameListData).filter(
+        (key) => key.length > INITIAL_INDEX_VALUE
       );
       setDropDownList(breedNameList);
     } catch (error) {
       console.error(error);
     }
+  };
+  // onClick of Dropdown Header
+  const onClickDropdownHeader = async () => {
+    setDropDownOpen((prevOpen) => !prevOpen);
+    setDropdownData();
   };
 
   return (
@@ -75,14 +62,14 @@ function DropDown({ getImageList, getDropDownStatus }) {
         <div className={styles.content}>
           {DropDownList.map((selectedItem, index) => {
             return (
-              <option
+              <div
                 key={index}
                 onClick={() => {
                   onClickSelectedItemClicked(selectedItem);
                 }}
               >
                 {selectedItem}
-              </option>
+              </div>
             );
           })}
         </div>

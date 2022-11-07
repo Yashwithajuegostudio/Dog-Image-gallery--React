@@ -31,7 +31,7 @@ export const errorMessage = {
   statusError: "Something went wrong",
   responseError: "Request failed with the status",
 };
-export const initialStateValue = 0;
+export const INITIAL_INDEX_VALUE = 0;
 
 // API Method Names
 export const methodName = {

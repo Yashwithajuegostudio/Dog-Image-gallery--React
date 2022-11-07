@@ -1,14 +1,14 @@
-import { title, initialStateValue } from "../../utils/constants";
+import { title } from "../../utils/constants";
 
 import styles from "./ImageContainer.module.css";
 
-function ImageContainer({ image, imageIndex }) {
+function ImageContainer({ imageList }) {
   return (
     <div className="image_container">
       <div className={styles.main_image_container}>
-        {image.length !== initialStateValue && (
+        {imageList && (
           <img
-            src={image[imageIndex]}
+            src={imageList}
             alt={title.defaultImageTitle}
             className={styles.default_image}
           />

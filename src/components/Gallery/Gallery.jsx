@@ -3,10 +3,17 @@ import DropDown from "../ImageDropdown/ImageDropdown";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
+import { getApiCall } from "../../services/apiServices";
+import {
+  BreedImageList,
+  errorMessage,
+  INITIAL_INDEX_VALUE,
+  status,
+} from "../../utils/constants";
 
 function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
-  const [dropDownStatus, setDropDownStatus] = useState();
+  const [dropDownStatusValue, setDropDownStatusValue] = useState();
   const [imageList, setImageList] = useState([]);
 
   // Get the ImageIndex from the dropdown component functionality
@@ -14,24 +21,39 @@ function Gallery() {
     setImageIndex(indexValue);
   };
 
-  // get the Image List from the dropdown component functionality
-  const getImageList = (imageList) => {
-    setImageList(imageList);
-  };
   // get the dropdown status from the dropdown component functionality
-  const getDropDownStatus = (dropDownStatus) => {
-    setDropDownStatus(dropDownStatus);
+  const setDropDownStatus = (dropDownStatus) => {
+    setDropDownStatusValue(dropDownStatus);
+  };
+  // set Breed Image data
+  const setBreedImageData = async (breedNameData) => {
+    try {
+      const breedImageListData = await getApiCall(
+        BreedImageList.replace(`breed/`, `breed/${breedNameData}/`)
+      ).then((data) => {
+        if (data.status !== status.successStatus) {
+          throw Error(errorMessage.statusError);
+        }
+        return data.message;
+      });
+      const breedImageArray = Object.values(breedImageListData).filter(
+        (value) => value.length > INITIAL_INDEX_VALUE
+      );
+      setImageList(breedImageArray);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className={styles.gallery_container}>
       <DropDown
-        getImageList={getImageList}
-        getDropDownStatus={getDropDownStatus}
+        setDropDownStatus={setDropDownStatus}
+        setBreedImageData={setBreedImageData}
       />
-      <ImageContainer image={imageList} imageIndex={imageIndex} />
+      <ImageContainer imageList={imageList[imageIndex]} />
       <ScrollingImageContainer
-        image={imageList}
-        dropDownStatus={dropDownStatus}
+        imageList={imageList}
+        dropDownStatus={dropDownStatusValue}
         getImageIndex={getImageIndex}
       />
     </div>
