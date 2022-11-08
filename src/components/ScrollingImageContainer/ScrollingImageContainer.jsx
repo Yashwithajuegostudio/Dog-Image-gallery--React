@@ -63,7 +63,7 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
                     imageIndex === previousIndexValue ? styles.active : ""
                   }
                   src={selectedItem}
-                  alt={title.scrollableImageTitle}
+                  alt="dog breed_image"
                   onClick={() => {
                     onClickScrollableImageItem(imageIndex);
                   }}

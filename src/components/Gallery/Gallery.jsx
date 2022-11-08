@@ -41,7 +41,7 @@ function Gallery() {
       );
       setImageList(breedImageArray);
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
   return (

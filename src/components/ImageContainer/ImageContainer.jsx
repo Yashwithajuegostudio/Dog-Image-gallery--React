@@ -1,5 +1,3 @@
-import { title } from "../../utils/constants";
-
 import styles from "./ImageContainer.module.css";
 
 function ImageContainer({ imageList }) {
@@ -9,7 +7,7 @@ function ImageContainer({ imageList }) {
         {imageList && (
           <img
             src={imageList}
-            alt={title.defaultImageTitle}
+            alt="main dog_image"
             className={styles.default_image}
           />
         )}

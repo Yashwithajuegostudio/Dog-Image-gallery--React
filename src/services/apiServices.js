@@ -6,7 +6,8 @@ export const getApiCall = async (getUrl) => {
     method: methodName.GET,
   });
   if (!response.ok) {
-    throw new Error(errorMessage.responseError + ` ${response.status}`);
+    throw Error(errorMessage.responseError + ` ${response.status}`);
+  } else {
+    return await response.json();
   }
-  return response.json();
 };

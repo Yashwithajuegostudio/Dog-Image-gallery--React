@@ -39,7 +39,7 @@ function DropDown({ setDropDownStatus, setBreedImageData }) {
       );
       setDropDownList(breedNameList);
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
   // onClick of Dropdown Header

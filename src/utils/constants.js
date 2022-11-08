@@ -8,8 +8,8 @@ export const title = {
   previousBtnTitle: "\u2039",
   nextBtnTitle: "\u203A",
   defaultDropdownTitle: "Please select a Breed ...",
-  defaultImageTitle: "defaultImage",
-  scrollableImageTitle: "scrollableImage",
+  mainImageTitle: "main dog image",
+  scrollableImageTitle: "dog image",
 };
 
 // BASE PATH
