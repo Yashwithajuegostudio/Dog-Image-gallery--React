@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
 import { getApiCall } from "../../services/apiServices";
-import {
-  breedList,
-  errorMessage,
-  title,
-  status,
-  INITIAL_INDEX_VALUE,
-} from "../../utils/constants";
+import { breedList, title, INITIAL_INDEX_VALUE } from "../../utils/constants";
 
 import styles from "./ImageDropdown.module.css";
 
@@ -28,16 +22,13 @@ function DropDown({ setDropDownStatus, setBreedImageData }) {
   // set the drop down header title
   const setDropdownData = async () => {
     try {
-      const breedNameListData = await getApiCall(breedList).then((data) => {
-        if (data.status !== status.successStatus) {
-          throw Error(errorMessage.statusError);
-        }
-        return data.message;
-      });
-      const breedNameList = Object.keys(breedNameListData).filter(
-        (key) => key.length > INITIAL_INDEX_VALUE
-      );
-      setDropDownList(breedNameList);
+      const breedNameListData = await getApiCall(breedList);
+      if (breedNameListData) {
+        const breedNameList = Object.keys(breedNameListData).filter(
+          (key) => key.length > INITIAL_INDEX_VALUE
+        );
+        setDropDownList(breedNameList);
+      }
     } catch (error) {
       alert(error);
     }

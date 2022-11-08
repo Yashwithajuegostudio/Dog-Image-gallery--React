@@ -4,12 +4,7 @@ import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
 import { getApiCall } from "../../services/apiServices";
-import {
-  BreedImageList,
-  errorMessage,
-  INITIAL_INDEX_VALUE,
-  status,
-} from "../../utils/constants";
+import { BreedImageList, INITIAL_INDEX_VALUE } from "../../utils/constants";
 
 function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
@@ -30,16 +25,13 @@ function Gallery() {
     try {
       const breedImageListData = await getApiCall(
         BreedImageList.replace(`breed/`, `breed/${breedNameData}/`)
-      ).then((data) => {
-        if (data.status !== status.successStatus) {
-          throw Error(errorMessage.statusError);
-        }
-        return data.message;
-      });
-      const breedImageArray = Object.values(breedImageListData).filter(
-        (value) => value.length > INITIAL_INDEX_VALUE
       );
-      setImageList(breedImageArray);
+      if (breedImageListData) {
+        const breedImageArray = Object.values(breedImageListData).filter(
+          (value) => value.length > INITIAL_INDEX_VALUE
+        );
+        setImageList(breedImageArray);
+      }
     } catch (error) {
       alert(error);
     }

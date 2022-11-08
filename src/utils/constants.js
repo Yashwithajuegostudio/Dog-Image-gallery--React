@@ -8,12 +8,10 @@ export const title = {
   previousBtnTitle: "\u2039",
   nextBtnTitle: "\u203A",
   defaultDropdownTitle: "Please select a Breed ...",
-  mainImageTitle: "main dog image",
-  scrollableImageTitle: "dog image",
 };
 
 // BASE PATH
-export const basePath = "https://dog.ceo/api";
+export const BASE_PATH = "https://dog.ceo/api";
 
 // Path
 export const breedList = "/breeds/list/all";

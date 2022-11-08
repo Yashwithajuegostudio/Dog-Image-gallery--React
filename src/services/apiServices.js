@@ -1,13 +1,30 @@
-import { basePath, errorMessage, methodName } from "../utils/constants";
+import {
+  BASE_PATH,
+  errorMessage,
+  methodName,
+  status,
+} from "../utils/constants";
 
 // API call
-export const getApiCall = async (getUrl) => {
-  const response = await fetch(basePath + getUrl, {
-    method: methodName.GET,
-  });
-  if (!response.ok) {
-    throw Error(errorMessage.responseError + ` ${response.status}`);
+
+const handleData = (data) => {
+  if (data.status !== status.successStatus) {
+    throw Error(errorMessage.statusError);
   } else {
-    return await response.json();
+    return data.message;
+  }
+};
+export const getApiCall = async (getUrl) => {
+  try {
+    const response = await fetch(BASE_PATH + getUrl, {
+      method: methodName.GET,
+    });
+    if (!response.ok) {
+      throw new Error(errorMessage.responseError + ` ${response.status}`);
+    }
+    const data = await response.json();
+    return handleData(data);
+  } catch (error) {
+    alert(error);
   }
 };
