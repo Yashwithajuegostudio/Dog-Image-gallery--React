@@ -63,11 +63,3 @@ img {
   height: 100%;
   display: block;
 }
-
-.select {
-  border-radius: 4;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
