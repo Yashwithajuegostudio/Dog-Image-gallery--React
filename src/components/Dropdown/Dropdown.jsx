@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { getApiCall } from "../../services/apiServices";
 import { breedList, title, INITIAL_INDEX_VALUE } from "../../utils/constants";
 
-import styles from "./ImageDropdown.module.css";
+import styles from "./Dropdown.module.css";
 
 function DropDown({ setDropDownStatus, setBreedImageData }) {
   const [DropdownTitle, setDropdownTitle] = useState(
