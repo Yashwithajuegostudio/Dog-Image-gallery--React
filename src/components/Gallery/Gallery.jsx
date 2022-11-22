@@ -2,14 +2,9 @@ import styles from "./Gallery.module.css";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
-import { getApiCall } from "../../services/apiServices";
-import {
-  BreedImageList,
-  breedList,
-  INITIAL_INDEX_VALUE,
-  title,
-} from "../../utils/constants";
+import { title } from "../../utils/constants";
 import CustomDropDown from "../CustomDropDown/CustomDropDown";
+import { setBreedImageData, setDropdownData } from "../../utils/helper";
 
 function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
@@ -25,45 +20,13 @@ function Gallery() {
     setImageIndex(indexValue);
   };
 
-  // set the drop down header title
-  const setDropdownData = async () => {
-    try {
-      const breedNameListData = await getApiCall(breedList);
-      if (breedNameListData) {
-        const breedNameList = Object.keys(breedNameListData).filter(
-          (key) => key.length > INITIAL_INDEX_VALUE
-        );
-        setDropDownList(breedNameList);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  // set Breed Image data
-  const setBreedImageData = async (breedNameData) => {
-    try {
-      const breedImageListData = await getApiCall(
-        BreedImageList.replace(`breed/`, `breed/${breedNameData}/`)
-      );
-      if (breedImageListData) {
-        const breedImageArray = Object.values(breedImageListData).filter(
-          (value) => value.length > INITIAL_INDEX_VALUE
-        );
-        setImageList(breedImageArray);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
   const setSelectedItem = (e) => {
     setDropDownOpen((dropDownOpen) => !dropDownOpen);
     setSelectedBreedName(e.target.value);
-    setBreedImageData(e.target.value);
+    setBreedImageData(e.target.value, setImageList);
   };
   const handleClick = () => {
-    setDropdownData();
+    setDropdownData(setDropDownList);
   };
   return (
     <div className={styles.gallery_container}>
