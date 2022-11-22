@@ -42,4 +42,4 @@ export const ID = {
 };
 
 // OffSet
-export const OFFSET = 90;
+export const SCROLL_OFFSET = 90;

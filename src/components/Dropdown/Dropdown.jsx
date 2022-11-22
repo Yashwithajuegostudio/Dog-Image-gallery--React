@@ -16,6 +16,7 @@ function DropDown({
         }}
       >
         {dropDownTitle}
+        <i class="fa fa-sort-down"></i>
       </div>
       {dropDownOpen && (
         <div className={styles.content}>

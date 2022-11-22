@@ -6,7 +6,6 @@ import {
 } from "../utils/constants";
 
 // API call
-
 const handleData = (data) => {
   if (data.status !== status.successStatus) {
     throw Error(errorMessage.statusError);
