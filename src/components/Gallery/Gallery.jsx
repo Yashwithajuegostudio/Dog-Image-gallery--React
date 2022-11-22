@@ -34,6 +34,9 @@ function Gallery() {
 
   return (
     <div className={styles.gallery_container}>
+      <menu>
+        <menuitem>HEllo</menuitem>
+      </menu>
       <div className={styles.drop_down}>
         <CustomDropDown
           dropDownList={dropDownList}
