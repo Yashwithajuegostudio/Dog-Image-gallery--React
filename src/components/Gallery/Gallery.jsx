@@ -20,14 +20,18 @@ function Gallery() {
     setImageIndex(indexValue);
   };
 
+  // set the selected Item in the dropdown list
   const setSelectedItem = (e) => {
     setDropDownOpen((dropDownOpen) => !dropDownOpen);
     setSelectedBreedName(e.target.value);
     setBreedImageData(e.target.value, setImageList);
   };
-  const handleClick = () => {
+
+  // dropdown header click functionality
+  const onClickDropDownHeader = () => {
     setDropdownData(setDropDownList);
   };
+
   return (
     <div className={styles.gallery_container}>
       <div className={styles.drop_down}>
@@ -35,7 +39,7 @@ function Gallery() {
           dropDownList={dropDownList}
           onChange={setSelectedItem}
           defaultValue={selectedBreedName}
-          clickHandler={handleClick}
+          clickHandler={onClickDropDownHeader}
         />
       </div>
       <ImageContainer imageList={imageList[imageIndex]} />
