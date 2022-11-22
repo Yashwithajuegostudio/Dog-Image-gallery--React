@@ -2,14 +2,14 @@ import styles from "./Gallery.module.css";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
-import { title } from "../../utils/constants";
+import { TITLE } from "../../utils/constants";
 import CustomDropDown from "../CustomDropDown/CustomDropDown";
 import { setBreedImageData, setDropdownData } from "../../utils/helper";
 
 function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
   const [selectedBreedName, setSelectedBreedName] = useState(
-    title.defaultDropdownTitle
+    TITLE.defaultDropdownTitle
   );
   const [imageList, setImageList] = useState([]);
   const [dropDownList, setDropDownList] = useState([]);
@@ -34,9 +34,6 @@ function Gallery() {
 
   return (
     <div className={styles.gallery_container}>
-      <menu>
-        <menuitem>HEllo</menuitem>
-      </menu>
       <div className={styles.drop_down}>
         <CustomDropDown
           dropDownList={dropDownList}

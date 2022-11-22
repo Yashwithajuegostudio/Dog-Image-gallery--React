@@ -1,11 +1,11 @@
 import { getApiCall } from "../services/apiServices";
-import { BreedImageList, breedList, INITIAL_INDEX_VALUE } from "./constants";
+import { BREED_IMAGE_LIST, BREED_LIST, INITIAL_INDEX_VALUE } from "./constants";
 
 // set Breed Image data
 export const setBreedImageData = async (breedNameData, setImageList) => {
   try {
     const breedImageListData = await getApiCall(
-      BreedImageList.replace(`breed/`, `breed/${breedNameData}/`)
+      BREED_IMAGE_LIST.replace(`breed/`, `breed/${breedNameData}/`)
     );
     if (breedImageListData) {
       const breedImageArray = Object.values(breedImageListData).filter(
@@ -21,7 +21,7 @@ export const setBreedImageData = async (breedNameData, setImageList) => {
 // set dropdown Dog Name List data
 export const setDropdownData = async (setDropDownList) => {
   try {
-    const breedNameListData = await getApiCall(breedList);
+    const breedNameListData = await getApiCall(BREED_LIST);
     if (breedNameListData) {
       const breedNameList = Object.keys(breedNameListData).filter(
         (key) => key.length > INITIAL_INDEX_VALUE

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-  activateBtn,
+  ACTIVATE_BTN,
   ID,
   INITIAL_INDEX_VALUE,
   SCROLL_OFFSET,
-  status,
-  title,
+  STATUS,
+  TITLE,
 } from "../../utils/constants";
 import Button from "../Button/Button";
 import styles from "./ScrollingImageContainer.module.css";
@@ -27,7 +27,7 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
   // slider button functionality
   const onclickSliderBtn = (btnStatus) => {
     const slider = document.getElementById(ID.sliderId);
-    if (btnStatus === status.previousBtnStatus) {
+    if (btnStatus === STATUS.previousBtnStatus) {
       setPreviousIndexValue(previousIndexValue - 1);
       slider.scrollLeft -= SCROLL_OFFSET;
       getImageIndex(previousIndexValue - 1);
@@ -41,17 +41,17 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
   return (
     <div className="image_container">
       <Button
-        title={title.previousBtnTitle}
+        title={TITLE.previousBtnTitle}
         clickHandler={() => {
-          onclickSliderBtn(status.previousBtnStatus);
+          onclickSliderBtn(STATUS.previousBtnStatus);
         }}
         disabled={previousIndexValue < 1}
       />
       <Button
-        title={title.previousBtnTitle}
+        title={TITLE.previousBtnTitle}
         position={styles.BtnPosition}
         clickHandler={() => {
-          onclickSliderBtn(status.previousBtnStatus);
+          onclickSliderBtn(STATUS.previousBtnStatus);
         }}
         disabled={previousIndexValue < 1}
       />
@@ -79,19 +79,19 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
         </div>
       </div>
       <Button
-        title={title.nextBtnTitle}
+        title={TITLE.nextBtnTitle}
         position={styles.BtnPosition}
-        style={activateBtn}
+        style={ACTIVATE_BTN}
         clickHandler={() => {
-          onclickSliderBtn(status.nextBtnStatus);
+          onclickSliderBtn(STATUS.nextBtnStatus);
         }}
         disabled={previousIndexValue >= imageList.length - 1}
       />
       <Button
-        title={title.nextBtnTitle}
-        style={activateBtn}
+        title={TITLE.nextBtnTitle}
+        style={ACTIVATE_BTN}
         clickHandler={() => {
-          onclickSliderBtn(status.nextBtnStatus);
+          onclickSliderBtn(STATUS.nextBtnStatus);
         }}
         disabled={previousIndexValue >= imageList.length - 1}
       />

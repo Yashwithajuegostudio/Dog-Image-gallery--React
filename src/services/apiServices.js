@@ -1,14 +1,14 @@
 import {
   BASE_PATH,
-  errorMessage,
-  methodName,
-  status,
+  ERROR_MESSAGE,
+  MEHTHOD_NAME,
+  STATUS,
 } from "../utils/constants";
 
 // API call
 const handleData = (data) => {
-  if (data.status !== status.successStatus) {
-    throw Error(errorMessage.statusError);
+  if (data.status !== STATUS.successStatus) {
+    throw Error(ERROR_MESSAGE.statusError);
   } else {
     return data.message;
   }
@@ -16,10 +16,10 @@ const handleData = (data) => {
 export const getApiCall = async (getUrl) => {
   try {
     const response = await fetch(BASE_PATH + getUrl, {
-      method: methodName.GET,
+      method: MEHTHOD_NAME.GET,
     });
     if (!response.ok) {
-      throw new Error(errorMessage.responseError + ` ${response.status}`);
+      throw new Error(ERROR_MESSAGE.responseError + ` ${response.status}`);
     }
     const data = await response.json();
     return handleData(data);
