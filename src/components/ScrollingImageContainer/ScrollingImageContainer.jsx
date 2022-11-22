@@ -3,7 +3,7 @@ import {
   activateBtn,
   ID,
   INITIAL_INDEX_VALUE,
-  OFFSET,
+  SCROLL_OFFSET,
   status,
   title,
 } from "../../utils/constants";
@@ -29,11 +29,11 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
     const slider = document.getElementById(ID.sliderId);
     if (btnStatus === status.previousBtnStatus) {
       setPreviousIndexValue(previousIndexValue - 1);
-      slider.scrollLeft -= OFFSET;
+      slider.scrollLeft -= SCROLL_OFFSET;
       getImageIndex(previousIndexValue - 1);
     } else {
       setPreviousIndexValue(previousIndexValue + 1);
-      slider.scrollLeft += OFFSET;
+      slider.scrollLeft += SCROLL_OFFSET;
       getImageIndex(previousIndexValue + 1);
     }
   };
