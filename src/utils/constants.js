@@ -35,3 +35,11 @@ export const INITIAL_INDEX_VALUE = 0;
 export const methodName = {
   GET: "GET",
 };
+
+// ID
+export const ID = {
+  sliderId: "slider",
+};
+
+// OffSet
+export const OFFSET = 90;

@@ -1,5 +1,4 @@
 import styles from "./Gallery.module.css";
-import DropDown from "../Dropdown/Dropdown";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import ScrollingImageContainer from "../ScrollingImageContainer/ScrollingImageContainer";
 import { useState } from "react";
@@ -10,25 +9,20 @@ import {
   INITIAL_INDEX_VALUE,
   title,
 } from "../../utils/constants";
+import CustomDropDown from "../CustomDropDown/CustomDropDown";
 
 function Gallery() {
   const [imageIndex, setImageIndex] = useState(0);
-  const [dropDownStatusValue, setDropDownStatusValue] = useState();
-  const [imageList, setImageList] = useState([]);
-  const [dropDownList, setDropDownList] = useState([]);
-  const [dropDownTitle, setDropdownTitle] = useState(
+  const [selectedBreedName, setSelectedBreedName] = useState(
     title.defaultDropdownTitle
   );
+  const [imageList, setImageList] = useState([]);
+  const [dropDownList, setDropDownList] = useState([]);
   const [dropDownOpen, setDropDownOpen] = useState(false);
 
   // Get the ImageIndex from the dropdown component functionality
   const getImageIndex = (indexValue) => {
     setImageIndex(indexValue);
-  };
-
-  // get the dropdown status from the dropdown component functionality
-  const setDropDownStatus = (dropDownStatus) => {
-    setDropDownStatusValue(dropDownStatus);
   };
 
   // set the drop down header title
@@ -44,21 +38,6 @@ function Gallery() {
     } catch (error) {
       alert(error);
     }
-  };
-
-  // OnClick of selectedItem in dropdown List
-  const onClickSelectedItemClicked = async (selectedItem) => {
-    setDropdownTitle(selectedItem);
-    setDropDownStatus(dropDownTitle);
-    setDropDownOpen((prevOpen) => !prevOpen);
-    setBreedImageData(selectedItem);
-  };
-
-  // onClick of Dropdown Header
-  const dropdownHeader = async () => {
-    setDropDownOpen((prevOpen) => !prevOpen);
-    setDropdownData();
-    return dropDownTitle;
   };
 
   // set Breed Image data
@@ -77,19 +56,29 @@ function Gallery() {
       alert(error);
     }
   };
+
+  const setSelectedItem = (e) => {
+    setDropDownOpen((dropDownOpen) => !dropDownOpen);
+    setSelectedBreedName(e.target.value);
+    setBreedImageData(e.target.value);
+  };
+  const handleClick = () => {
+    setDropdownData();
+  };
   return (
     <div className={styles.gallery_container}>
-      <DropDown
-        dropDownList={dropDownList}
-        onClickDropdownHeader={dropdownHeader}
-        dropDownTitle={dropDownTitle}
-        dropDownOpen={dropDownOpen}
-        onClickSelectedItemClicked={onClickSelectedItemClicked}
-      />
+      <div className={styles.drop_down}>
+        <CustomDropDown
+          dropDownList={dropDownList}
+          onChange={setSelectedItem}
+          defaultValue={selectedBreedName}
+          clickHandler={handleClick}
+        />
+      </div>
       <ImageContainer imageList={imageList[imageIndex]} />
       <ScrollingImageContainer
         imageList={imageList}
-        dropDownStatus={dropDownStatusValue}
+        dropDownStatus={dropDownOpen}
         getImageIndex={getImageIndex}
       />
     </div>

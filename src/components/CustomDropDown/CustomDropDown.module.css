@@ -1,0 +1,9 @@
+.select {
+  border: none;
+  outline: none;
+  border: thin solid var(--primary-black-color);
+  border-radius: 0.3rem;
+  padding: 0.5rem 0rem 0.5rem 1rem;
+  margin: 0;
+  min-width: 10rem;
+}

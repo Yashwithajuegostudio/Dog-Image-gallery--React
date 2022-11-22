@@ -1,3 +1,11 @@
 .gallery_container {
   padding: 2rem 0.5rem;
 }
+.drop_down {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}

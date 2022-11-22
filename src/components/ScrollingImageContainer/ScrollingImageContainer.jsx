@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   activateBtn,
+  ID,
   INITIAL_INDEX_VALUE,
+  OFFSET,
   status,
   title,
 } from "../../utils/constants";
@@ -24,11 +26,14 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
 
   // slider button functionality
   const onclickSliderBtn = (btnStatus) => {
+    const slider = document.getElementById(ID.sliderId);
     if (btnStatus === status.previousBtnStatus) {
       setPreviousIndexValue(previousIndexValue - 1);
+      slider.scrollLeft -= OFFSET;
       getImageIndex(previousIndexValue - 1);
     } else {
       setPreviousIndexValue(previousIndexValue + 1);
+      slider.scrollLeft += OFFSET;
       getImageIndex(previousIndexValue + 1);
     }
   };
@@ -50,7 +55,7 @@ function ScrollingImageContainer({ imageList, dropDownStatus, getImageIndex }) {
         }}
         disabled={previousIndexValue < 1}
       />
-      <div className={styles.scrolling_image_container}>
+      <div className={styles.scrolling_image_container} id={ID.sliderId}>
         <div className={styles.slides}>
           {imageList.map((selectedItem, imageIndex) => {
             return (
